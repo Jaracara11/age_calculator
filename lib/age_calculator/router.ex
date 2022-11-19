@@ -22,7 +22,7 @@ defmodule RestApi.Router do
 
   # Handler for GET request with "/" path
   get "/" do
-    send_resp(conn, 200, "OK")
+    send_resp(conn, 200, "Endpoint Ready!")
   end
 
   # Fallback handler when there was no match
