@@ -11,10 +11,19 @@ defmodule AgeCalculator do
   ISO 8601
   """
   def calculate_age(birthday) do
+    age_return_type = System.get_env("AGE_RETURN_TYPE")
+
     birthday_str = String.split(birthday, "-")
     birthday_str = Enum.at(birthday_str, 0)
     birthday_int = String.to_integer(birthday_str)
     current_year_int = DateTime.utc_now().year
     age = current_year_int - birthday_int
+
+    if age_return_type == "string" do
+     "#{age}"
+    else
+      age
+    end
+
   end
 end
