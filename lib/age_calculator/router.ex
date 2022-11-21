@@ -19,7 +19,7 @@ defmodule RestApi.Router do
 
   get "/:age" do
     IO.inspect age
-    send_resp(conn, 200, "#{age}")
+    send_resp(conn, 200, Jason.encode!(%{age: "#{age}"}))
   end
 
   match _ do
