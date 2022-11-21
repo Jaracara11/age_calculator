@@ -17,8 +17,8 @@ defmodule RestApi.Router do
     send_resp(conn, 200, "Endpoint Ready!")
   end
 
-  get "/:age" do
-    IO.inspect age
+  get "/age/:birthday" do
+    age = AgeCalculator.calculate_age(birthday)
     send_resp(conn, 200, Jason.encode!(%{age: "#{age}"}))
   end
 
