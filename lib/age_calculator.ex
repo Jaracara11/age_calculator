@@ -16,6 +16,5 @@ defmodule AgeCalculator do
     birthday_int = String.to_integer(birthday_str)
     current_year_int = DateTime.utc_now().year
     age = current_year_int - birthday_int
-    age
   end
 end

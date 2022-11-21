@@ -19,7 +19,7 @@ defmodule RestApi.Router do
 
   get "/age/:birthday" do
     age = AgeCalculator.calculate_age(birthday)
-    send_resp(conn, 200, Jason.encode!(%{age: "#{age}"}))
+    send_resp(conn, 200, Jason.encode!(%{age: age}))
   end
 
   match _ do
