@@ -12,7 +12,7 @@ defmodule RestApi.Router do
   plug(:dispatch)
 
   get "/" do
-    send_resp(conn, 200, "Endpoint Ready!")
+    send_resp(conn, 200, Jason.encode!(%{status: "Endpoint Ready!"}))
   end
 
   get "/age/:birthday" do
