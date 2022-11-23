@@ -12,7 +12,7 @@ defmodule AgeCalculator.Application do
         options: [port: Application.get_env(:age_calculator, :port)]
       }
     ]
-    IO.puts("Application is running on #{port}")
+    IO.puts("Application is running on port #{port}")
     opts = [strategy: :one_for_one, name: AgeCalculator.Supervisor]
     Supervisor.start_link(children, opts)
   end
