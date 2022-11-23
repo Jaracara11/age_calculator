@@ -21,6 +21,6 @@ defmodule RestApi.Router do
   end
 
   match _ do
-    send_resp(conn, 404, "Not Found")
+    send_resp(conn, 404, Jason.encode!(%{status: "404: Not Found!"}))
   end
 end
