@@ -11,7 +11,7 @@ defmodule AgeCalculator do
   ISO 8601
   """
   def calculate_age(birthday) do
-    age_return_type = System.get_env("AGE_RETURN_TYPE")
+    age_return_type = Application.get_env(:age_calculator, :age_return_type)
 
     birthday_str = String.split(birthday, "-")
     birthday_str = Enum.at(birthday_str, 0)
