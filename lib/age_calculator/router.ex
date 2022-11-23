@@ -1,5 +1,6 @@
 defmodule RestApi.Router do
   use Plug.Router
+  
   plug(Plug.Logger)
   plug(:match)
 
