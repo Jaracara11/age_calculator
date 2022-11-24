@@ -2,30 +2,31 @@ defmodule AgeCalculator.Server do
   use GenServer
 
   def start_link do
-    GenServer.start_link(__MODULE__, ["Hello"])
+    GenServer.start_link(__MODULE__, [])
   end
 
-  def init(init_arg) do
+  def get_age(birthdate) do
+    age = AgeCalculator.calculate_age(birthdate)
+  end
+
+  def push(pid, value) do
+    GenServer.cast(pid, {:push, value})
+  end
+
+  def pop(pid) do
+    GenServer.call(pid, :pop)
+  end
+
+  def init([]) do
     IO.puts("GenServer Started")
-    greetings = %{:greeting => init_arg}
-    {:ok, greetings}
+    {:ok, []}
   end
 
-  def get_my_greeting(process_id) do
-    GenServer.call(process_id, {:get_the_greeting})
+  def handle_cast({:push, value}, state) do
+    {:noreply, [value | state]}
   end
 
-  def set_my_greeting(process_id, new_greeting) do
-    GenServer.call(process_id, {:set_the_greeting, new_greeting})
-  end
-
-  def handle_call({:get_the_greeting}, _from, my_state) do
-    current_greeting = Map.get(my_state, :greeting)
-    {:reply, current_greeting, my_state}
-  end
-
-  def handle_call({:set_the_greeting, the_new_greeting}, _from, my_state) do
-    new_state = Map.put(my_state, :greeting, the_new_greeting)
-    {:reply, new_state, my_state}
+  def handle_call(:pop, _from, [head | tail]) do
+    {:reply, head, tail}
   end
 end

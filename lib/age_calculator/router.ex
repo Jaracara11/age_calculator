@@ -1,6 +1,6 @@
 defmodule RestApi.Router do
   use Plug.Router
-  
+
   plug(Plug.Logger)
   plug(:match)
 
@@ -16,8 +16,8 @@ defmodule RestApi.Router do
     send_resp(conn, 200, Jason.encode!(%{status: "Endpoint Ready!"}))
   end
 
-  get "/age/:birthday" do
-    age = AgeCalculator.calculate_age(birthday)
+  get "/age/:birthdate" do
+    age = AgeCalculator.calculate_age(birthdate)
     send_resp(conn, 200, Jason.encode!(%{age: age}))
   end
 
