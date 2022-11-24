@@ -6,7 +6,7 @@ defmodule AgeCalculator.Server do
   end
 
   def get_age(birthdate) do
-    age = AgeCalculator.calculate_age(birthdate)
+    AgeCalculator.calculate_age(birthdate)
   end
 
   def push(pid, value) do
