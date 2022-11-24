@@ -4,6 +4,7 @@ defmodule AgeCalculator.Application do
   @impl true
   def start(_type, _args) do
     port = Application.get_env(:age_calculator, :port)
+    {AgeCalculator.Server.Worker, []}
     children = [
       {
         Plug.Cowboy,
