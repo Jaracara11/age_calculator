@@ -17,7 +17,7 @@ defmodule RestApi.Router do
   end
 
   get "/age/:birthdate" do
-    age = AgeCalculator.Server.get_age(birthdate)
+    age = AgeCalculator.Server.get_age(:ac_server, birthdate)
     send_resp(conn, 200, Jason.encode!(%{age: age}))
   end
 

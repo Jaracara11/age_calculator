@@ -1,32 +1,24 @@
 defmodule AgeCalculator.Server do
   use GenServer
 
-  def start_link do
-    GenServer.start_link(__MODULE__, [])
+  def start_link(args) do
+    IO.puts("GenServer start_link Started")
+    GenServer.start_link(__MODULE__, args, name: :ac_server)
   end
 
-  def get_age(birthdate) do
-    AgeCalculator.calculate_age(birthdate)
+  def get_age(pid, birthdate) do
+    IO.puts("get_age: #{birthdate}")
+    GenServer.call(pid, birthdate)
   end
 
-  def push(pid, value) do
-    GenServer.cast(pid, {:push, value})
+  def handle_call(:result, _from, age) do
+    # AgeCalculator.calculate_age(birthdate)
+    IO.puts("handle_call: #{:result}, #{age}")
+    {:reply, age, age}
   end
 
-  def pop(pid) do
-    GenServer.call(pid, :pop)
-  end
-
-  def init([]) do
+  def init(age) do
     IO.puts("GenServer Started")
-    {:ok, []}
-  end
-
-  def handle_cast({:push, value}, state) do
-    {:noreply, [value | state]}
-  end
-
-  def handle_call(:pop, _from, [head | tail]) do
-    {:reply, head, tail}
+    {:ok, age}
   end
 end

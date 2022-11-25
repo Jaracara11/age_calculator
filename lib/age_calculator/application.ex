@@ -11,7 +11,8 @@ defmodule AgeCalculator.Application do
         scheme: :http,
         plug: RestApi.Router,
         options: [port: Application.get_env(:age_calculator, :port)]
-      }
+      },
+      {AgeCalculator.Server, []}
     ]
 
     IO.puts("Application is running on port: #{port}")
